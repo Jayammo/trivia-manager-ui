@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
 			<Router>
 				<Header />
 				<Container maxWidth='md'>
-					<Paper sx={{ minHeight: '90vh' }}>
+					<Paper sx={{ minHeight: '90vh', overflow: 'auto' }}>
 						<CssBaseline />
 						<Nav />
 						{children}
