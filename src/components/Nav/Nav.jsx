@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Tab, Tabs } from '@mui/material';
+import { Box, Tab, Tabs } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import './Nav.css';
 
 const Nav = () => {
 	const [index, setIndex] = useState(0);
@@ -12,14 +11,13 @@ const Nav = () => {
 	};
 
 	return (
-		<div className='tabs'>
+		<Box display='flex' justifyContent='center'>
 			<Tabs value={index} onChange={handleChange}>
 				<Tab label='Home' onClick={() => navigate('/')} />
 				<Tab label='Teams' onClick={() => navigate('/teams')} />
 				<Tab label='Questions' onClick={() => navigate('/questions')} />
-				<Tab label='Trivia Events' onClick={() => navigate('/trivia')} />
 			</Tabs>
-		</div>
+		</Box>
 	);
 };
 

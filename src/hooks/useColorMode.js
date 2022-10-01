@@ -1,18 +1,18 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { createTheme } from '@mui/material';
-import { orange } from '@mui/material/colors';
 
 const useColorMode = () => {
 	const [mode, setMode] = useState('light');
 
-	const colorMode = useMemo(
-		() => ({
-			toggleColorMode: () => {
-				setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-			},
-		}),
-		[]
-	);
+	const colorMode = useMemo(() => ({
+		toggleColorMode: () => {
+			setMode((prevMode) => {
+				const currentMode = prevMode === 'light' ? 'dark' : 'light';
+				localStorage.setItem('TriviaMangerTheme', currentMode);
+				return currentMode;
+			});
+		},
+	}));
 
 	const theme = useMemo(
 		() =>
@@ -20,13 +20,15 @@ const useColorMode = () => {
 				palette: {
 					mode,
 				},
-				status: {
-					danger: orange[500],
-				},
 			}),
 		[mode]
 	);
-	return { theme, colorMode, mode };
+
+	useEffect(() => {
+		setMode(localStorage.getItem('TriviaMangerTheme') || 'light');
+	}, [setMode]);
+
+	return { theme, colorMode };
 };
 
 export default useColorMode;

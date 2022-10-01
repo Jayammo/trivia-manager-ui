@@ -1,23 +1,51 @@
-import React from 'react';
-import { Card, CardContent, Typography, Box, useTheme } from '@mui/material';
+import React, { useState } from 'react';
+import {
+	Card,
+	CardContent,
+	Typography,
+	Box,
+	useTheme,
+	CardHeader,
+	IconButton,
+} from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { MenuItemWrap, MenuWrap } from '../UI/MenuWrap';
 
 const TriviaCard = ({ trivia }) => {
 	const theme = useTheme();
+	const [anchorEl, setAnchorEl] = useState(null);
+	const open = Boolean(anchorEl);
+
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+
 	return (
-		<Box sx={{ width: 450, marginTop: theme.spacing(2) }}>
-			<Card variant='outlined' raised={true}>
+		<Box sx={{ width: 450, margin: theme.spacing(2) }}>
+			<Card raised={true}>
+				<CardHeader
+					action={
+						<IconButton aria-label='settings' onClick={handleClick}>
+							<MoreVertIcon />
+						</IconButton>
+					}
+					title={trivia.title}
+					subheader='Wednesday on March 12, 2023'
+				/>
 				<CardContent>
-					<Typography color='text.secondary' gutterBottom>
-						Trivia Event Name
-					</Typography>
-					<Typography color='text.secondary'>adjective</Typography>
-					<Typography variant='body2'>
-						Location: World of Beer
-						<br />
-						{'Wednesday on March 12, 2023'}
-					</Typography>
+					<Typography variant='body2'>Location: {trivia.location}</Typography>
 				</CardContent>
 			</Card>
+			<MenuWrap anchorEl={anchorEl} open={open} onClose={handleClose}>
+				<MenuItemWrap onClick={handleClose}>Edit</MenuItemWrap>
+				<MenuItemWrap onClick={handleClose} confirm='true'>
+					Remove
+				</MenuItemWrap>
+			</MenuWrap>
 		</Box>
 	);
 };
