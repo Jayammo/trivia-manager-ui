@@ -1,21 +1,20 @@
 import React from 'react';
-import { Card, CardContent, Typography, Box } from '@mui/material';
+import { Card, CardContent, Typography, Box, useTheme } from '@mui/material';
 
 const TriviaCard = ({ trivia }) => {
+	const theme = useTheme();
 	return (
-		<Box sx={{ width: 275 }}>
+		<Box sx={{ width: 450, marginTop: theme.spacing(2) }}>
 			<Card variant='outlined' raised={true}>
 				<CardContent>
-					<Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-						Word of the Day
+					<Typography color='text.secondary' gutterBottom>
+						Trivia Event Name
 					</Typography>
-					<Typography sx={{ mb: 1.5 }} color='text.secondary'>
-						adjective
-					</Typography>
+					<Typography color='text.secondary'>adjective</Typography>
 					<Typography variant='body2'>
-						well meaning and kindly.
+						Location: World of Beer
 						<br />
-						{'"a benevolent smile"'}
+						{'Wednesday on March 12, 2023'}
 					</Typography>
 				</CardContent>
 			</Card>

@@ -1,22 +1,17 @@
-import './App.css';
 import Layout from './components/Layout/Layout';
-import { createTheme, ThemeProvider } from '@mui/material';
-import { orange } from '@mui/material/colors';
+import { ThemeProvider } from '@mui/material';
+import { ColorModeContextProvider } from './context/ColorModeContext';
+import useColorMode from './hooks/useColorMode';
 
 function App() {
-	const theme = createTheme({
-		palette: {
-			mode: 'dark',
-		},
-		status: {
-			danger: orange[500],
-		},
-	});
+	const { theme, colorMode } = useColorMode();
 
 	return (
-		<ThemeProvider theme={theme}>
-			<Layout className='container' />
-		</ThemeProvider>
+		<ColorModeContextProvider value={colorMode}>
+			<ThemeProvider theme={theme}>
+				<Layout />
+			</ThemeProvider>
+		</ColorModeContextProvider>
 	);
 }
 
