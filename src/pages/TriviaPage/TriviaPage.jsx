@@ -1,23 +1,35 @@
-import { Box } from '@mui/material';
+import { Box, Button, Divider } from '@mui/material';
 import TriviaCard from '../../components/TriviaCard/TriviaCard';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 
 const TriviPage = () => {
-	const trivias = [
-		{
-			title: 'Drunk History Trivia',
-			location: 'World of Beer',
-		},
-		{
-			title: 'Bone Yard Trivia',
-			location: 'Rockin Crab',
-		},
-	];
+	const trivias = useStoreState((state) => state.trivias.items);
+	const { add: createTriviaEvent } = useStoreActions(
+		(actions) => actions.trivias
+	);
 
-	return trivias.map((trivia, index) => (
-		<Box key={index} style={{ display: 'flex', justifyContent: 'center' }}>
-			<TriviaCard trivia={trivia} />
-		</Box>
-	));
+	const createNew = () => {
+		createTriviaEvent({
+			Id: 3,
+			title: 'New World Trivia',
+			location: 'Farm House BBQ',
+		});
+	};
+
+	return (
+		<>
+			<Box>
+				<Button variant='outlined' onClick={createNew}>
+					Create New
+				</Button>
+			</Box>
+			{trivias.map((trivia, index) => (
+				<Box key={index} style={{ display: 'flex', justifyContent: 'center' }}>
+					<TriviaCard trivia={trivia} />
+				</Box>
+			))}
+		</>
+	);
 };
 
 export default TriviPage;

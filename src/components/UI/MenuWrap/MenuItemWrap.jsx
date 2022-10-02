@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { MenuItem } from '@mui/material';
-import ConfirmChips from '../Confrimation/ConfrimChips/ConfirmChips';
+import ConfirmButtons from '../Confirmation/ConfirmButtons/ConfirmButtons';
 
 const MenuItemWrap = (props) => {
-	const { confirm = false, children, onClick } = props;
+	const { confirm = false, children, onClick, onClose } = props;
 	const [menuItemText, setMenuItemText] = useState(children);
 
 	const handleClick = () => {
@@ -11,14 +11,14 @@ const MenuItemWrap = (props) => {
 			setMenuItemText(
 				<>
 					{children}:
-					<ConfirmChips onConfirm={onClick} onClose={onClose} />
+					<ConfirmButtons onConfirm={onClick} onClose={onCancel} />
 				</>
 			);
 		}
 	};
 
-	const onClose = () => {
-		onClick();
+	const onCancel = () => {
+		onClose();
 	};
 
 	if (confirm) return <MenuItem onClick={handleClick}>{menuItemText}</MenuItem>;
