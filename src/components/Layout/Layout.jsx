@@ -8,6 +8,7 @@ import {
 	Paper,
 	Divider,
 	useTheme,
+	Box,
 } from '@mui/material';
 
 const Layout = ({ children }) => {
@@ -17,11 +18,28 @@ const Layout = ({ children }) => {
 			<Router>
 				<Header />
 				<Container maxWidth='md'>
-					<Paper sx={{ minHeight: '90vh', overflow: 'auto' }}>
+					<Paper
+						sx={{
+							display: 'flex',
+							flexDirection: 'column',
+							minHeight: '90vh',
+							overflow: 'auto',
+						}}
+					>
 						<CssBaseline />
 						<Nav />
-						<Divider sx={{ marginBottom: theme.spacing(1) }} />
-						{children}
+						<Divider />
+						<Box
+							sx={{
+								display: 'flex',
+								flexDirection: 'column',
+								flexGrow: 1,
+								display: 'flex',
+								padding: theme.spacing(1),
+							}}
+						>
+							{children}
+						</Box>
 					</Paper>
 				</Container>
 			</Router>

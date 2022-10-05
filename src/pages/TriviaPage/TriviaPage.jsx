@@ -1,4 +1,4 @@
-import { Box, Button, Divider } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import TriviaCard from '../../components/TriviaCard/TriviaCard';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
