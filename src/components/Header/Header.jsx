@@ -8,9 +8,9 @@ import {
 	useTheme,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { ColorModeContext } from '../../context/ColorModeContext';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { ColorModeContext } from '../../context/ThemeColorModeContext';
 
 const Header = () => {
 	const theme = useTheme();
@@ -18,7 +18,7 @@ const Header = () => {
 
 	return (
 		<Box sx={{ flexGrow: 1, minHeight: '5vh' }}>
-			<AppBar position='static'>
+			<AppBar position='static' enableColorOnDark>
 				<Toolbar>
 					<IconButton
 						size='large'
