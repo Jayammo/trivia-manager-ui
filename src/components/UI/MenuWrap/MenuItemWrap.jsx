@@ -1,29 +1,45 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { MenuItem } from '@mui/material';
 import ConfirmButtons from '../Confirmation/ConfirmButtons/ConfirmButtons';
 
-const MenuItemWrap = (props) => {
-	const { confirm = false, children, onClick, onClose } = props;
-	const [menuItemText, setMenuItemText] = useState(children);
+const MenuItemWrap = ({
+	confirm = false,
+	children,
+	onClick,
+	onClose,
+	...otherProps
+}) => {
+	const [confirmReady, setConfirmReady] = useState(false);
 
 	const handleClick = () => {
-		if (confirm) {
-			setMenuItemText(
-				<>
-					{children}:
-					<ConfirmButtons onConfirm={onClick} onClose={onCancel} />
-				</>
-			);
-		}
+		setConfirmReady((prev) => !prev);
 	};
 
-	const onCancel = () => {
-		onClose();
+	const onCancel = (event) => {
+		event.stopPropagation();
+		setConfirmReady(false);
 	};
 
-	if (confirm) return <MenuItem onClick={handleClick}>{menuItemText}</MenuItem>;
+	const confirmButtonsWrapper = (
+		<>
+			{children}:
+			<ConfirmButtons onConfirm={onClick} onClose={onCancel} />
+		</>
+	);
 
-	return <MenuItem {...props}></MenuItem>;
+	if (confirm) {
+		return (
+			<MenuItem onClick={handleClick}>
+				{confirmReady ? confirmButtonsWrapper : children}
+			</MenuItem>
+		);
+	}
+
+	return (
+		<MenuItem onClick={onClick} {...otherProps}>
+			{children}
+		</MenuItem>
+	);
 };
 
 export default MenuItemWrap;

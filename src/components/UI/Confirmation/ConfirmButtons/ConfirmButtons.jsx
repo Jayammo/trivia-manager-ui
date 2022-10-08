@@ -5,17 +5,12 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const ConfirmChips = ({ onClose, onConfirm }) => {
 	return (
-		<Box
-			display='flex'
-			sx={{
-				gap: '5px',
-			}}
-		>
-			<IconButton color='error' onClick={onClose}>
-				<CancelIcon />
+		<Box ml={0.5}>
+			<IconButton color='error' onClick={onClose} size='small'>
+				<CancelIcon size='small' />
 			</IconButton>
-			<IconButton color='success' onClick={onConfirm}>
-				<CheckCircleIcon />
+			<IconButton color='success' onClick={onConfirm} size='small'>
+				<CheckCircleIcon size='small' />
 			</IconButton>
 		</Box>
 	);
