@@ -1,26 +1,26 @@
-import { useState } from 'react';
 import {
 	Card,
 	Box,
-	TextField,
 	CardContent,
 	Typography,
 	CardHeader,
 	CardActions,
 	Button,
 } from '@mui/material';
+import FormTextField from '../../../components/UI/Form/FormTextField';
+import { useForm, useFormState } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { SignInYupSchema } from './SignInYupSchema';
 
 const SignIn = () => {
-	const [state, setState] = useState({ email: '', password: '' });
-	const [password, setPassword] = useState('');
+	const { control, handleSubmit } = useForm({
+		mode: 'onSubmit',
+		reValidateMode: 'onBlur',
+		resolver: yupResolver(SignInYupSchema),
+	});
 
-	const handleChange = ({ target }) => {
-		setState((prev) => {
-			return {
-				...prev,
-				[target.name]: target.value,
-			};
-		});
+	const onSubmit = (data, event) => {
+		console.log('On Submit =>', { data, event });
 	};
 
 	return (
@@ -33,7 +33,7 @@ const SignIn = () => {
 				width: '100%',
 			}}
 		>
-			<Card raised={true}>
+			<Card sx={{ width: 500 }} raised={true}>
 				<CardHeader
 					title={
 						<Typography variant='h4' align='center'>
@@ -41,30 +41,22 @@ const SignIn = () => {
 						</Typography>
 					}
 				/>
-				<CardContent>
-					<TextField
-						required
-						fullWidth
-						name='email'
-						label='Email'
-						value={state.email}
-						onChange={handleChange}
-					/>
-					<TextField
-						required
-						fullWidth
-						name='password'
-						label='Password'
-						type='password'
-						autoComplete='current-password'
-						sx={{ marginTop: '15px' }}
-						value={state.password}
-						onChange={handleChange}
-					/>
-				</CardContent>
-				<CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-					<Button>Submit</Button>
-				</CardActions>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<CardContent>
+						<FormTextField control={control} name='email' label='Email' />
+
+						<FormTextField
+							control={control}
+							name='password'
+							label='Password'
+							type='password'
+							sx={{ marginTop: '15px' }}
+						/>
+					</CardContent>
+					<CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+						<Button type='submit'>Submit</Button>
+					</CardActions>
+				</form>
 			</Card>
 		</Box>
 	);
