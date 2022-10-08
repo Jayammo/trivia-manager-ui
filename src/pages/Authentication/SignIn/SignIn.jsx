@@ -8,7 +8,7 @@ import {
 	Button,
 } from '@mui/material';
 import FormTextField from '../../../components/UI/Form/FormTextField';
-import { useForm, useFormState } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SignInYupSchema } from './SignInYupSchema';
 
@@ -33,7 +33,7 @@ const SignIn = () => {
 				width: '100%',
 			}}
 		>
-			<Card sx={{ width: 500 }} raised={true}>
+			<Card raised={true}>
 				<CardHeader
 					title={
 						<Typography variant='h4' align='center'>

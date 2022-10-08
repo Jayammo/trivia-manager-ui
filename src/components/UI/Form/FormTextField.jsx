@@ -12,8 +12,8 @@ const FormTextField = ({ control, name, ...otherTextFieldProps }) => {
 			render={({ field }) => (
 				<TextField
 					{...field}
-					fullWidth
 					{...otherTextFieldProps}
+					fullWidth
 					error={hasError}
 					helperText={message}
 				/>
