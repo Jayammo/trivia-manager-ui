@@ -10,13 +10,11 @@ import {
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { MenuItemWrap, MenuWrap } from '../UI/MenuWrap';
-import { useStoreActions } from 'easy-peasy';
 
 const TriviaCard = ({ trivia }) => {
 	const theme = useTheme();
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
-	const { remove } = useStoreActions((action) => action.trivias);
 
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -28,7 +26,6 @@ const TriviaCard = ({ trivia }) => {
 
 	const onRemove = () => {
 		console.log('trivia =>', trivia);
-		remove(trivia);
 		setAnchorEl(null);
 	};
 

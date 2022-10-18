@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import { StoreProvider } from 'easy-peasy';
 import { store } from './context/Store/store';
 import TriviPage from './pages/TriviaPage/TriviaPage';
 import Layout from './components/Layout/Layout';
@@ -15,18 +14,16 @@ function App() {
 			cookieDomain={window.location.hostname}
 			cookieSecure={window.location.protocol === 'https:'}
 		>
-			<StoreProvider store={store}>
-				<ThemeColorModeContextProvider>
-					<Layout>
-						<Routes>
-							<Route path='/' element={<TriviPage />} />
-							<Route path='/sign-in' element={<SignIn />} />
-							<Route path='/teams' element={<div>Teams</div>} />
-							<Route path='/questions' element={<div>Question</div>} />
-						</Routes>
-					</Layout>
-				</ThemeColorModeContextProvider>
-			</StoreProvider>
+			<ThemeColorModeContextProvider>
+				<Layout>
+					<Routes>
+						<Route path='/' element={<TriviPage />} />
+						<Route path='/sign-in' element={<SignIn />} />
+						<Route path='/teams' element={<div>Teams</div>} />
+						<Route path='/questions' element={<div>Question</div>} />
+					</Routes>
+				</Layout>
+			</ThemeColorModeContextProvider>
 		</AuthProvider>
 	);
 }
