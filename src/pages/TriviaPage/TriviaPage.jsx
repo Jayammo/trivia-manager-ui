@@ -1,8 +1,11 @@
 import { Box, Button } from '@mui/material';
 import TriviaCard from '../../components/TriviaCard/TriviaCard';
+import { triviaEventFetchAll } from '../../services/TriviaManager/TriviaEventService';
 
 const TriviPage = () => {
-	const createNew = () => {};
+	const createNew = async () => {
+		await triviaEventFetchAll();
+	};
 
 	return (
 		<>

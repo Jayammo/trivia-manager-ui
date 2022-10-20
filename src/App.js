@@ -1,10 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
-import { store } from './context/Store/store';
-import TriviPage from './pages/TriviaPage/TriviaPage';
-import Layout from './components/Layout/Layout';
 import { AuthProvider } from 'react-auth-kit';
-import SignIn from './pages/Authentication/SignIn/SignIn';
-import { ThemeColorModeContextProvider } from './context/ThemeColorModeContext';
+import TriviPage from './pages/TriviaPage/TriviaPage.jsx';
+import Layout from './components/Layout/Layout.jsx';
+import SignIn from './pages/Authentication/SignIn/SignIn.jsx';
+import { ThemeColorModeContextProvider } from './contexts/ThemeColorModeContext.js';
 
 function App() {
 	return (
