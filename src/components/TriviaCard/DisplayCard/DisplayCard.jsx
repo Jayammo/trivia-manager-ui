@@ -9,9 +9,9 @@ import {
 	IconButton,
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { MenuItemWrap, MenuWrap } from '../UI/MenuWrap';
+import { MenuItemWrap, MenuWrap } from '../../UI/MenuWrap';
 
-const TriviaCard = ({ trivia }) => {
+const DisplayCard = ({ trivia }) => {
 	const theme = useTheme();
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
@@ -34,15 +34,18 @@ const TriviaCard = ({ trivia }) => {
 			<Card raised={true}>
 				<CardHeader
 					action={
-						<IconButton aria-label='settings' onClick={handleClick}>
+						<IconButton onClick={handleClick}>
 							<MoreVertIcon />
 						</IconButton>
 					}
 					title={trivia.title}
-					subheader='Wednesday on March 12, 2023'
+					subheader={trivia.startTime}
 				/>
 				<CardContent>
-					<Typography variant='body2'>Location: {trivia.location}</Typography>
+					<Typography variant='body2'>
+						Location Name: {trivia.locationName}
+					</Typography>
+					<Typography variant='body2'>Adress: {trivia.adress}</Typography>
 				</CardContent>
 			</Card>
 			<MenuWrap anchorEl={anchorEl} open={open} onClose={handleClose}>
@@ -55,4 +58,4 @@ const TriviaCard = ({ trivia }) => {
 	);
 };
 
-export default TriviaCard;
+export default DisplayCard;

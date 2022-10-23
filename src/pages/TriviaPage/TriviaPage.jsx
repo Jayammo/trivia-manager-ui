@@ -1,10 +1,18 @@
 import { Box, Button } from '@mui/material';
-import TriviaCard from '../../components/TriviaCard/TriviaCard';
-import { triviaEventFetchAll } from '../../services/TriviaManager/TriviaEventService';
+import { useNavigate } from 'react-router-dom';
+import { DisplayCard } from '../../components/TriviaCard/index';
+import TriviaCard from '../../components/TriviaCard/DisplayCard/DisplayCard';
 
 const TriviPage = () => {
-	const createNew = async () => {
-		await triviaEventFetchAll();
+	const navigate = useNavigate();
+	const createNew = () => {
+		navigate('/trivia/create');
+	};
+	const triviaEvent = {
+		title: 'Trivia Event',
+		startTime: 'Start Time',
+		locationName: 'Location',
+		adress: 'Adress',
 	};
 
 	return (
@@ -14,9 +22,9 @@ const TriviPage = () => {
 					Create New
 				</Button>
 			</Box>
-			{[].map((trivia, index) => (
+			{[triviaEvent].map((trivia, index) => (
 				<Box key={index} style={{ display: 'flex', justifyContent: 'center' }}>
-					<TriviaCard trivia={trivia} />
+					<DisplayCard trivia={trivia} />
 				</Box>
 			))}
 		</>

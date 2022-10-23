@@ -4,6 +4,7 @@ import TriviPage from './pages/TriviaPage/TriviaPage.jsx';
 import Layout from './components/Layout/Layout.jsx';
 import SignIn from './pages/Authentication/SignIn/SignIn.jsx';
 import { ThemeColorModeContextProvider } from './contexts/ThemeColorModeContext.js';
+import CreateTriviaEventPage from './pages/TriviaPage/CreateTriviaEvent/CreateTriviaEventPage.jsx';
 
 function App() {
 	return (
@@ -16,7 +17,9 @@ function App() {
 			<ThemeColorModeContextProvider>
 				<Layout>
 					<Routes>
-						<Route path='/' element={<TriviPage />} />
+						<Route path='/' element={<div>Home</div>} />
+						<Route path='/trivia' element={<TriviPage />} />
+						<Route path='/trivia/create' element={<CreateTriviaEventPage />} />
 						<Route path='/sign-in' element={<SignIn />} />
 						<Route path='/teams' element={<div>Teams</div>} />
 						<Route path='/questions' element={<div>Question</div>} />
