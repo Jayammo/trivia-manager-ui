@@ -11,11 +11,12 @@ const FormTextField = ({ control, name, ...otherTextFieldProps }) => {
 			control={control}
 			render={({ field }) => (
 				<TextField
-					{...field}
-					{...otherTextFieldProps}
 					fullWidth
 					error={hasError}
 					helperText={message}
+					sx={{ marginTop: 2 }}
+					{...field}
+					{...otherTextFieldProps}
 				/>
 			)}
 		/>

@@ -8,12 +8,14 @@ const TriviPage = () => {
 	const createNew = () => {
 		navigate('/trivia/create');
 	};
-	const triviaEvent = {
-		title: 'Trivia Event',
-		startTime: 'Start Time',
-		locationName: 'Location',
-		adress: 'Adress',
-	};
+	const triviaEvents = [
+		{
+			title: 'Trivia Event',
+			startTime: 'Start Time',
+			locationName: 'Location',
+			adress: 'Adress',
+		},
+	];
 
 	return (
 		<>
@@ -22,7 +24,7 @@ const TriviPage = () => {
 					Create New
 				</Button>
 			</Box>
-			{[triviaEvent].map((trivia, index) => (
+			{triviaEvents.map((trivia, index) => (
 				<Box key={index} style={{ display: 'flex', justifyContent: 'center' }}>
 					<DisplayCard trivia={trivia} />
 				</Box>

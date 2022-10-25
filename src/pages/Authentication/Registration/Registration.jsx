@@ -10,34 +10,24 @@ import {
 import FormTextField from '../../../components/UI/Form/FormTextField';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { SignInYupSchema } from '../AuthYupSchema';
-import { login } from '../../../services/TriviaManager/AuthService';
-import { useSignIn } from 'react-auth-kit';
-import { useNavigate } from 'react-router-dom';
+import { register } from '../../../services/TriviaManager/AuthService';
+import { RegistrationYupSchema } from '../AuthYupSchema';
 
-const SignIn = () => {
+const Registration = () => {
 	const { control, handleSubmit } = useForm({
 		mode: 'onSubmit',
 		reValidateMode: 'onBlur',
-		defaultValues: { username: '', password: '' },
-		resolver: yupResolver(SignInYupSchema),
+		defaultValues: { username: '', email: '', password: '' },
+		resolver: yupResolver(RegistrationYupSchema),
 	});
-	const signIn = useSignIn();
-	const navigate = useNavigate();
 
-	const onSubmit = async (data) => {
-		const loginModel = { username: data.username, password: data.password };
-		const tokenString = await login(loginModel);
-		const response = JSON.parse(tokenString);
-		if (
-			signIn({
-				token: response.token,
-				expiresIn: 3,
-				tokenType: 'Bearer',
-			})
-		) {
-			navigate('/trivia');
-		}
+	const onSubmit = (data) => {
+		const registerModel = {
+			username: data.username,
+			email: data.email,
+			password: data.password,
+		};
+		register(registerModel);
 	};
 
 	return (
@@ -55,14 +45,14 @@ const SignIn = () => {
 					sx={{ paddingBottom: 0 }}
 					title={
 						<Typography variant='h4' align='center'>
-							Sign In
+							Register
 						</Typography>
 					}
 				/>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<CardContent>
 						<FormTextField control={control} name='username' label='Username' />
-
+						<FormTextField control={control} name='email' label='Email' />
 						<FormTextField
 							control={control}
 							name='password'
@@ -79,4 +69,4 @@ const SignIn = () => {
 	);
 };
 
-export default SignIn;
+export default Registration;
