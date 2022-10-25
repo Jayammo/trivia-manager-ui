@@ -10,7 +10,7 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { ColorModeContext } from '../../context/ThemeColorModeContext';
+import { ColorModeContext } from '../../contexts/ThemeColorModeContext';
 
 const Header = () => {
 	const theme = useTheme();

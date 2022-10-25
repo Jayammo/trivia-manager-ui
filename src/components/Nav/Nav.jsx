@@ -13,7 +13,7 @@ const Nav = () => {
 	return (
 		<Box display='flex' justifyContent='center'>
 			<Tabs value={index} onChange={handleChange}>
-				<Tab label='Home' onClick={() => navigate('/')} />
+				<Tab label='Home' onClick={() => navigate('/trivia')} />
 				<Tab label='Teams' onClick={() => navigate('/teams')} />
 				<Tab label='Questions' onClick={() => navigate('/questions')} />
 			</Tabs>

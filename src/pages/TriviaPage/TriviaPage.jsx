@@ -1,20 +1,21 @@
 import { Box, Button } from '@mui/material';
-import TriviaCard from '../../components/TriviaCard/TriviaCard';
-import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useNavigate } from 'react-router-dom';
+import { DisplayCard } from '../../components/TriviaCard/index';
+import TriviaCard from '../../components/TriviaCard/DisplayCard/DisplayCard';
 
 const TriviPage = () => {
-	const trivias = useStoreState((state) => state.trivias.items);
-	const { add: createTriviaEvent } = useStoreActions(
-		(actions) => actions.trivias
-	);
-
+	const navigate = useNavigate();
 	const createNew = () => {
-		createTriviaEvent({
-			Id: 3,
-			title: 'New World Trivia',
-			location: 'Farm House BBQ',
-		});
+		navigate('/trivia/create');
 	};
+	const triviaEvents = [
+		{
+			title: 'Trivia Event',
+			startTime: 'Start Time',
+			locationName: 'Location',
+			adress: 'Adress',
+		},
+	];
 
 	return (
 		<>
@@ -23,9 +24,9 @@ const TriviPage = () => {
 					Create New
 				</Button>
 			</Box>
-			{trivias.map((trivia, index) => (
+			{triviaEvents.map((trivia, index) => (
 				<Box key={index} style={{ display: 'flex', justifyContent: 'center' }}>
-					<TriviaCard trivia={trivia} />
+					<DisplayCard trivia={trivia} />
 				</Box>
 			))}
 		</>
