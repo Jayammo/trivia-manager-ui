@@ -35,7 +35,7 @@ const Header = () => {
 						sx={{ flexGrow: 1 }}
 						align='center'
 					>
-						Triva Manager
+						Trivia Manager
 					</Typography>
 					<IconButton
 						sx={{ ml: 1 }}
