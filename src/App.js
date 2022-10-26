@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { AuthProvider } from 'react-auth-kit';
-import TriviPage from './pages/TriviaPage/TriviaPage.jsx';
+import TriviaPage from './pages/TriviaPage/TriviaPage.jsx';
 import Layout from './components/Layout/Layout.jsx';
 import SignIn from './pages/Authentication/SignIn/SignIn.jsx';
 import { ThemeColorModeContextProvider } from './contexts/ThemeColorModeContext.js';
@@ -19,7 +19,7 @@ function App() {
 				<Layout>
 					<Routes>
 						<Route path='/' element={<div>Home</div>} />
-						<Route path='/trivia' element={<TriviPage />} />
+						<Route path='/trivia' element={<TriviaPage />} />
 						<Route path='/trivia/create' element={<CreateTriviaEventPage />} />
 						<Route path='/sign-in' element={<SignIn />} />
 						<Route path='/registration' element={<Registration />} />
