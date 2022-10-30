@@ -39,6 +39,7 @@ const SignIn = () => {
 					authState: { username: loginModel.username },
 				})
 			) {
+				sessionStorage.setItem('_triviaCookie', response.token);
 				navigate('/trivia');
 			}
 		} catch (err) {
