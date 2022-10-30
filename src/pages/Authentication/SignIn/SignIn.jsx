@@ -11,7 +11,7 @@ import FormTextField from '../../../components/UI/Form/FormTextField';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SignInYupSchema } from '../AuthYupSchema';
-import { login } from '../../../services/TriviaManager/AuthService';
+import { loginUser } from '../../../services/TriviaManager/AuthService';
 import { useSignIn } from 'react-auth-kit';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,16 +27,22 @@ const SignIn = () => {
 
 	const onSubmit = async (data) => {
 		const loginModel = { username: data.username, password: data.password };
-		const tokenString = await login(loginModel);
-		const response = JSON.parse(tokenString);
-		if (
-			signIn({
-				token: response.token,
-				expiresIn: 3,
-				tokenType: 'Bearer',
-			})
-		) {
-			navigate('/trivia');
+		try {
+			const tokenString = await loginUser(loginModel);
+			const response = JSON.parse(tokenString);
+			console.log({ response, tokenString });
+			if (
+				signIn({
+					token: response.token,
+					expiresIn: 3,
+					tokenType: 'Bearer',
+					authState: { username: loginModel.username },
+				})
+			) {
+				navigate('/trivia');
+			}
+		} catch (err) {
+			console.error('Error Here =>', err);
 		}
 	};
 

@@ -10,7 +10,7 @@ import {
 import FormTextField from '../../../components/UI/Form/FormTextField';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { register } from '../../../services/TriviaManager/AuthService';
+import { registerUser } from '../../../services/TriviaManager/AuthService';
 import { RegistrationYupSchema } from '../AuthYupSchema';
 
 const Registration = () => {
@@ -27,7 +27,7 @@ const Registration = () => {
 			email: data.email,
 			password: data.password,
 		};
-		register(registerModel);
+		registerUser(registerModel);
 	};
 
 	return (

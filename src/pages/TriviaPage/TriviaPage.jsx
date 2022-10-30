@@ -1,7 +1,8 @@
 import { Box, Button } from '@mui/material';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DisplayCard } from '../../components/TriviaCard/index';
-import TriviaCard from '../../components/TriviaCard/DisplayCard/DisplayCard';
+import { fetchAllTriviaEvent } from '../../services/TriviaManager/TriviaEventService';
 
 const TriviPage = () => {
 	const navigate = useNavigate();
@@ -16,7 +17,13 @@ const TriviPage = () => {
 			adress: 'Adress',
 		},
 	];
-
+	useEffect(() => {
+		const fetch = async () => {
+			const triviaList = await fetchAllTriviaEvent();
+			console.log({ triviaList });
+		};
+		fetch();
+	}, []);
 	return (
 		<>
 			<Box>

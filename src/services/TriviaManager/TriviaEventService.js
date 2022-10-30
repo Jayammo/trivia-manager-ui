@@ -1,6 +1,6 @@
 import { triviaApi } from '../api';
 
-const TRIVIA_EVENT = 'TriviaEvent';
+const TRIVIA_EVENT = '/trivia/event';
 
 export const fetchAllTriviaEvent = () => {
 	return triviaApi
