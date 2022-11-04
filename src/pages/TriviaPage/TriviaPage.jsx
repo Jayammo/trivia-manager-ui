@@ -1,13 +1,11 @@
 import { Box, Button } from '@mui/material';
 import { useEffect } from 'react';
-import { useAuthHeader } from 'react-auth-kit';
 import { useNavigate } from 'react-router-dom';
 import { DisplayCard } from '../../components/TriviaCard/index';
 import { fetchAllTriviaEvent } from '../../services/TriviaManager/TriviaEventService';
 
 const TriviPage = () => {
 	const navigate = useNavigate();
-	const authHeader = useAuthHeader();
 
 	const createNew = () => {
 		navigate('/trivia/create');
@@ -22,7 +20,6 @@ const TriviPage = () => {
 	];
 	useEffect(() => {
 		const fetch = async () => {
-			console.log(authHeader());
 			const triviaList = await fetchAllTriviaEvent();
 			console.log({ triviaList });
 		};

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getToken } from '../helper/CookieHandler';
+import { GetToken } from '../helper/CookieHandler';
 
 export const triviaApi = axios.create({
 	baseURL: 'https://localhost:7112/api',
@@ -7,8 +7,8 @@ export const triviaApi = axios.create({
 });
 
 triviaApi.interceptors.request.use((config) => {
-	if (getToken('_triviaCookie')) {
-		config.headers['Authorization'] = `Bearer ${getToken('_triviaCookie')}`;
+	if (GetToken()) {
+		config.headers['Authorization'] = `Bearer ${GetToken()}`;
 	}
 	return config;
 });

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Nav from '../Nav/Nav';
 import Header from '../Header/Header';
@@ -34,7 +35,6 @@ const Layout = ({ children }) => {
 								display: 'flex',
 								flexDirection: 'column',
 								flexGrow: 1,
-								display: 'flex',
 								padding: theme.spacing(1),
 							}}
 						>
@@ -48,3 +48,7 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
+
+Layout.prototypes = {
+	children: PropTypes.any,
+};

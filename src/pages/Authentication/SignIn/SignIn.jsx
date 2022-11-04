@@ -12,8 +12,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SignInYupSchema } from '../AuthYupSchema';
 import { loginUser } from '../../../services/TriviaManager/AuthService';
-import { useSignIn } from 'react-auth-kit';
 import { useNavigate } from 'react-router-dom';
+import { SetCookie } from '../../../helper/CookieHandler';
+// import { AuthContext } from '../../../contexts/AuthProvider';
+// import { useContext } from 'react';
 
 const SignIn = () => {
 	const { control, handleSubmit } = useForm({
@@ -22,8 +24,8 @@ const SignIn = () => {
 		defaultValues: { username: '', password: '' },
 		resolver: yupResolver(SignInYupSchema),
 	});
-	const signIn = useSignIn();
 	const navigate = useNavigate();
+	// const authState = useContext(AuthContext);
 
 	const onSubmit = async (data) => {
 		const loginModel = { username: data.username, password: data.password };
@@ -31,15 +33,9 @@ const SignIn = () => {
 			const tokenString = await loginUser(loginModel);
 			const response = JSON.parse(tokenString);
 			console.log({ response, tokenString });
-			if (
-				signIn({
-					token: response.token,
-					expiresIn: 3,
-					tokenType: 'Bearer',
-					authState: { username: loginModel.username },
-				})
-			) {
-				sessionStorage.setItem('_triviaCookie', response.token);
+			if (response?.token) {
+				console.log('AuthState =>', response.token);
+				SetCookie(response.token);
 				navigate('/trivia');
 			}
 		} catch (err) {

@@ -6,11 +6,11 @@ import { ThemeColorModeContextProvider } from './contexts/ThemeColorModeContext.
 import CreateTriviaEventPage from './pages/TriviaPage/CreateTriviaEvent/CreateTriviaEventPage.jsx';
 import Registration from './pages/Authentication/Registration/Registration.jsx';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute.jsx';
-import { AuthProviderWrapper } from './contexts/AuthProviderWrapper.js';
+import { AuthProvider } from './contexts/AuthProvider.js';
 
 function App() {
 	return (
-		<AuthProviderWrapper>
+		<AuthProvider>
 			<ThemeColorModeContextProvider>
 				<Layout>
 					<Routes>
@@ -42,7 +42,7 @@ function App() {
 					</Routes>
 				</Layout>
 			</ThemeColorModeContextProvider>
-		</AuthProviderWrapper>
+		</AuthProvider>
 	);
 }
 

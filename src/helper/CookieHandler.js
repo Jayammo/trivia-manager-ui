@@ -1,26 +1,17 @@
-export const getToken = (name) => {
-	return sessionStorage.getItem(name);
+import jwt_decode from 'jwt-decode';
+
+export const GetToken = () => {
+	return sessionStorage.getItem('_triviaCookie');
 };
 
-export const setCookie = (cname, cvalue, exdays) => {
-	const d = new Date();
-	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-	let expires = 'expires=' + d.toUTCString();
-	document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
+export const SetCookie = (token) => {
+	sessionStorage.setItem('_triviaCookie', token);
 };
 
-export const getCookie = (cname) => {
-	let name = cname + '=';
-	let decodedCookie = decodeURIComponent(document.cookie);
-	let ca = decodedCookie.split(';');
-	for (let i = 0; i < ca.length; i++) {
-		let c = ca[i];
-		while (c.charAt(0) === ' ') {
-			c = c.substring(1);
-		}
-		if (c.indexOf(name) === 0) {
-			return c.substring(name.length, c.length);
-		}
+export const DecodeToken = () => {
+	const token = GetToken();
+	if (!token) {
+		return {};
 	}
-	return '';
+	return jwt_decode(token);
 };
