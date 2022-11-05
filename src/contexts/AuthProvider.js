@@ -1,20 +1,29 @@
-import { createContext, useState } from 'react';
-import { DecodeToken } from '../helper/CookieHandler';
+import { createContext, useContext, useState } from 'react';
+import { loginUser, registerUser } from '../services/TriviaManager/AuthService';
 
-const authState = {
-	userName: '',
-	roles: [],
-	expiresIn: 3,
-	isActive: false,
+const AuthContext = createContext();
+
+export const useAuth = () => {
+	return useContext(AuthContext);
 };
 
-export const AuthContext = createContext(authState);
 export const AuthProvider = ({ children }) => {
-	const [authState, setAuthState] = useState(DecodeToken());
+	const [currentUser, setCurrentUser] = useState();
 
-	return (
-		<AuthContext.Provider value={{ authState, setAuthState }}>
-			{children}
-		</AuthContext.Provider>
-	);
+	const signup = (username, email, password) => {
+		return registerUser(username, email, password);
+	};
+
+	const login = (email, password) => {
+		return loginUser(email, password);
+	};
+
+	const value = {
+		currentUser,
+		setCurrentUser,
+		signup,
+		login,
+	};
+
+	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

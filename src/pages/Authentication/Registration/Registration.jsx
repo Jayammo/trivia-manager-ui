@@ -10,8 +10,8 @@ import {
 import FormTextField from '../../../components/UI/Form/FormTextField';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { registerUser } from '../../../services/TriviaManager/AuthService';
 import { RegistrationYupSchema } from '../AuthYupSchema';
+import { useAuth } from '../../../contexts/AuthProvider';
 
 const Registration = () => {
 	const { control, handleSubmit } = useForm({
@@ -21,13 +21,16 @@ const Registration = () => {
 		resolver: yupResolver(RegistrationYupSchema),
 	});
 
+	const { signup } = useAuth();
+
 	const onSubmit = (data) => {
 		const registerModel = {
 			username: data.username,
 			email: data.email,
 			password: data.password,
 		};
-		registerUser(registerModel);
+
+		signup(registerModel);
 	};
 
 	return (

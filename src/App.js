@@ -12,35 +12,25 @@ function App() {
 	return (
 		<AuthProvider>
 			<ThemeColorModeContextProvider>
-				<Layout>
-					<Routes>
-						<Route
-							path='/'
-							element={<PrivateRoute element={<div>Home</div>} />}
-						/>
-						<Route
-							path='/trivia'
-							element={<PrivateRoute element={<TriviaPage />} />}
-						/>
-						<Route
-							path='/trivia/create'
-							element={<PrivateRoute element={<CreateTriviaEventPage />} />}
-						/>
-						<Route
-							path='/registration'
-							element={<PrivateRoute element={<Registration />} />}
-						/>
-						<Route
-							path='/teams'
-							element={<PrivateRoute element={<div>Teams</div>} />}
-						/>
-						<Route
-							path='/questions'
-							element={<PrivateRoute element={<div>Question</div>} />}
-						/>
-						<Route path='/sign-in' element={<SignIn />} />
-					</Routes>
-				</Layout>
+				<Routes>
+					<Route path='/' element={<Layout />}>
+						{/* public routes */}
+						<Route path='sign-in' element={<SignIn />} />
+						<Route path='registration' element={<Registration />} />
+						<Route path='/' element={<div>Home</div>} />
+
+						{/* protected routes */}
+						<Route element={<PrivateRoute />}>
+							<Route path='trivia' element={<TriviaPage />} />
+							<Route path='trivia/create' element={<CreateTriviaEventPage />} />
+							<Route path='teams' element={<div>Teams</div>} />
+							<Route path='questions' element={<div>Question</div>} />
+						</Route>
+
+						{/* catch all */}
+						<Route path='*' element={<div>Missing</div>} />
+					</Route>
+				</Routes>
 			</ThemeColorModeContextProvider>
 		</AuthProvider>
 	);

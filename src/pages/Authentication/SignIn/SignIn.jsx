@@ -11,11 +11,9 @@ import FormTextField from '../../../components/UI/Form/FormTextField';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SignInYupSchema } from '../AuthYupSchema';
-import { loginUser } from '../../../services/TriviaManager/AuthService';
 import { useNavigate } from 'react-router-dom';
 import { SetCookie } from '../../../helper/CookieHandler';
-// import { AuthContext } from '../../../contexts/AuthProvider';
-// import { useContext } from 'react';
+import { useAuth } from '../../../contexts/AuthProvider';
 
 const SignIn = () => {
 	const { control, handleSubmit } = useForm({
@@ -25,16 +23,16 @@ const SignIn = () => {
 		resolver: yupResolver(SignInYupSchema),
 	});
 	const navigate = useNavigate();
-	// const authState = useContext(AuthContext);
+	const { login, setCurrentUser } = useAuth();
 
 	const onSubmit = async (data) => {
 		const loginModel = { username: data.username, password: data.password };
 		try {
-			const tokenString = await loginUser(loginModel);
+			const tokenString = await login(loginModel);
 			const response = JSON.parse(tokenString);
-			console.log({ response, tokenString });
+
 			if (response?.token) {
-				console.log('AuthState =>', response.token);
+				setCurrentUser({ username: loginModel.username });
 				SetCookie(response.token);
 				navigate('/trivia');
 			}

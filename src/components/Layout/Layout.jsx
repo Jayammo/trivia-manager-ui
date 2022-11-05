@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router } from 'react-router-dom';
 import Nav from '../Nav/Nav';
 import Header from '../Header/Header';
 import {
@@ -11,38 +10,37 @@ import {
 	useTheme,
 	Box,
 } from '@mui/material';
+import { Outlet } from 'react-router-dom';
 
-const Layout = ({ children }) => {
+const Layout = () => {
 	const theme = useTheme();
 	return (
 		<>
-			<Router>
-				<Header />
-				<Container maxWidth='md'>
-					<Paper
+			<Header />
+			<Container maxWidth='md'>
+				<Paper
+					sx={{
+						display: 'flex',
+						flexDirection: 'column',
+						minHeight: '90vh',
+						overflow: 'auto',
+					}}
+				>
+					<CssBaseline />
+					<Nav />
+					<Divider />
+					<Box
 						sx={{
 							display: 'flex',
 							flexDirection: 'column',
-							minHeight: '90vh',
-							overflow: 'auto',
+							flexGrow: 1,
+							padding: theme.spacing(1),
 						}}
 					>
-						<CssBaseline />
-						<Nav />
-						<Divider />
-						<Box
-							sx={{
-								display: 'flex',
-								flexDirection: 'column',
-								flexGrow: 1,
-								padding: theme.spacing(1),
-							}}
-						>
-							{children}
-						</Box>
-					</Paper>
-				</Container>
-			</Router>
+						<Outlet />
+					</Box>
+				</Paper>
+			</Container>
 		</>
 	);
 };

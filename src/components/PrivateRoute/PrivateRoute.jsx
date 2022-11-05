@@ -1,15 +1,13 @@
-import { useContext } from 'react';
-// import { RequireAuth } from 'react-auth-kit';
-import { AuthContext } from '../../contexts/AuthProvider';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthProvider';
 
-export const PrivateRoute = ({ element }) => {
-	const authState = useContext(AuthContext);
-	console.log('AuthState =>', authState);
-	return (
-		<div
-		// loginPath={'/sign-in'}
-		>
-			{element}
-		</div>
+export const PrivateRoute = () => {
+	const { currentUser } = useAuth();
+	const location = useLocation();
+
+	return currentUser?.username ? (
+		<Outlet />
+	) : (
+		<Navigate to='/sign-in' state={{ from: location }} replace />
 	);
 };

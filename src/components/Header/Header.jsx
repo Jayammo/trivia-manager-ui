@@ -1,21 +1,8 @@
-import { useContext } from 'react';
-import {
-	Box,
-	AppBar,
-	Toolbar,
-	IconButton,
-	Typography,
-	useTheme,
-} from '@mui/material';
+import { Box, AppBar, Toolbar, IconButton, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { ColorModeContext } from '../../contexts/ThemeColorModeContext';
+import HeaderOptions from './HeaderOptions/HeaderOptions';
 
 const Header = () => {
-	const theme = useTheme();
-	const colorMode = useContext(ColorModeContext);
-
 	return (
 		<Box sx={{ flexGrow: 1, minHeight: '5vh' }}>
 			<AppBar position='static' enableColorOnDark>
@@ -37,17 +24,7 @@ const Header = () => {
 					>
 						Trivia Manager
 					</Typography>
-					<IconButton
-						sx={{ ml: 1 }}
-						onClick={colorMode.toggleColorMode}
-						color='inherit'
-					>
-						{theme.palette.mode === 'dark' ? (
-							<Brightness7Icon />
-						) : (
-							<Brightness4Icon />
-						)}
-					</IconButton>
+					<HeaderOptions />
 				</Toolbar>
 			</AppBar>
 		</Box>
