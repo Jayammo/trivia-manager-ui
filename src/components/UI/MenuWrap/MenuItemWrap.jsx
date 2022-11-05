@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { MenuItem } from '@mui/material';
 import ConfirmButtons from '../Confirmation/ConfirmButtons/ConfirmButtons';
 
@@ -6,7 +6,6 @@ const MenuItemWrap = ({
 	confirm = false,
 	children,
 	onClick,
-	onClose,
 	...otherProps
 }) => {
 	const [confirmReady, setConfirmReady] = useState(false);
