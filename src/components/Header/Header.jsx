@@ -1,10 +1,19 @@
 import { Box, AppBar, Toolbar, IconButton, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import HeaderOptions from './HeaderOptions/HeaderOptions';
+import styled from '@emotion/styled';
+
+const StyledBox = styled(Box)`
+	min-height: 5vh;
+`;
+
+const StyledTypography = styled(Typography)`
+	width: 100%;
+`;
 
 const Header = () => {
 	return (
-		<Box sx={{ flexGrow: 1, minHeight: '5vh' }}>
+		<StyledBox>
 			<AppBar position='static' enableColorOnDark>
 				<Toolbar>
 					<IconButton
@@ -12,22 +21,16 @@ const Header = () => {
 						edge='start'
 						color='inherit'
 						aria-label='menu'
-						sx={{ mr: 2 }}
 					>
 						<ArrowBackIcon />
 					</IconButton>
-					<Typography
-						variant='h6'
-						component='div'
-						sx={{ flexGrow: 1 }}
-						align='center'
-					>
+					<StyledTypography variant='h6' component='div' align='center'>
 						Trivia Manager
-					</Typography>
+					</StyledTypography>
 					<HeaderOptions />
 				</Toolbar>
 			</AppBar>
-		</Box>
+		</StyledBox>
 	);
 };
 

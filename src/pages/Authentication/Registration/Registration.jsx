@@ -1,10 +1,8 @@
 import {
 	Card,
-	Box,
 	CardContent,
 	Typography,
 	CardHeader,
-	CardActions,
 	Button,
 } from '@mui/material';
 import FormTextField from '../../../components/UI/Form/FormTextField';
@@ -12,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegistrationYupSchema } from '../AuthYupSchema';
 import { useAuth } from '../../../contexts/AuthProvider';
+import { StyledBox, StyledCardActions } from '../StyledAuth';
 
 const Registration = () => {
 	const { control, handleSubmit } = useForm({
@@ -34,15 +33,7 @@ const Registration = () => {
 	};
 
 	return (
-		<Box
-			sx={{
-				flexGrow: 1,
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-				width: '100%',
-			}}
-		>
+		<StyledBox>
 			<Card raised={true}>
 				<CardHeader
 					sx={{ paddingBottom: 0 }}
@@ -63,12 +54,12 @@ const Registration = () => {
 							type='password'
 						/>
 					</CardContent>
-					<CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+					<StyledCardActions>
 						<Button type='submit'>Submit</Button>
-					</CardActions>
+					</StyledCardActions>
 				</form>
 			</Card>
-		</Box>
+		</StyledBox>
 	);
 };
 

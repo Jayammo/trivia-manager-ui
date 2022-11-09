@@ -4,15 +4,19 @@ import {
 	CardContent,
 	Typography,
 	Box,
-	useTheme,
 	CardHeader,
 	IconButton,
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { MenuItemWrap, MenuWrap } from '../../UI/MenuWrap';
+import styled from '@emotion/styled';
+
+const StyledBox = styled(Box)`
+	width: 450;
+	margin: ${({ theme }) => theme.spacing(2)};
+`;
 
 const DisplayCard = ({ trivia }) => {
-	const theme = useTheme();
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 
@@ -30,7 +34,7 @@ const DisplayCard = ({ trivia }) => {
 	};
 
 	return (
-		<Box sx={{ width: 450, margin: theme.spacing(2) }}>
+		<StyledBox>
 			<Card raised={true}>
 				<CardHeader
 					action={
@@ -54,7 +58,7 @@ const DisplayCard = ({ trivia }) => {
 					Remove
 				</MenuItemWrap>
 			</MenuWrap>
-		</Box>
+		</StyledBox>
 	);
 };
 
