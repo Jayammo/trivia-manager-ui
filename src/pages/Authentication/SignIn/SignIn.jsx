@@ -1,10 +1,8 @@
 import {
 	Card,
-	Box,
 	CardContent,
 	Typography,
 	CardHeader,
-	CardActions,
 	Button,
 } from '@mui/material';
 import FormTextField from '../../../components/UI/Form/FormTextField';
@@ -14,6 +12,7 @@ import { SignInYupSchema } from '../AuthYupSchema';
 import { useNavigate } from 'react-router-dom';
 import { SetCookie } from '../../../helper/CookieHandler';
 import { useAuth } from '../../../contexts/AuthProvider';
+import { StyledBox, StyledCardActions } from '../StyledAuth';
 
 const SignIn = () => {
 	const { control, handleSubmit } = useForm({
@@ -42,18 +41,9 @@ const SignIn = () => {
 	};
 
 	return (
-		<Box
-			sx={{
-				flexGrow: 1,
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-				width: '100%',
-			}}
-		>
+		<StyledBox>
 			<Card raised={true}>
 				<CardHeader
-					sx={{ paddingBottom: 0 }}
 					title={
 						<Typography variant='h4' align='center'>
 							Sign In
@@ -71,12 +61,12 @@ const SignIn = () => {
 							type='password'
 						/>
 					</CardContent>
-					<CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+					<StyledCardActions>
 						<Button type='submit'>Submit</Button>
-					</CardActions>
+					</StyledCardActions>
 				</form>
 			</Card>
-		</Box>
+		</StyledBox>
 	);
 };
 

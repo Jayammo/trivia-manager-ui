@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import {
 	Box,
 	Button,
@@ -5,22 +6,28 @@ import {
 	CardActions,
 	CardContent,
 	CardHeader,
-	useTheme,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import FormTextField from '../../UI/Form/FormTextField';
 
-const EditableCard = () => {
-	const theme = useTheme();
+export const StyledCardActions = styled(CardActions)`
+	display: flex;
+	justify-content: flex-end;
+`;
 
+const StyledBox = styled(Box)`
+	width: 100%;
+	margin: ${({ theme }) => theme.spacing(2)};
+`;
+
+const EditableCard = () => {
 	const { control, handleSubmit } = useForm({
 		mode: 'onSubmit',
 		reValidateMode: 'onBlur',
-		// resolver: yupResolver(SignInYupSchema),
 	});
 
 	return (
-		<Box sx={{ width: 450, margin: theme.spacing(2) }}>
+		<StyledBox>
 			<Card raised={true}>
 				<CardHeader
 					action={
@@ -38,20 +45,15 @@ const EditableCard = () => {
 								name='locationName'
 								label='Location Name'
 							/>
-							<FormTextField
-								control={control}
-								name='address'
-								label='Address'
-								sx={{ marginTop: theme.spacing(2) }}
-							/>
+							<FormTextField control={control} name='address' label='Address' />
 						</CardContent>
-						<CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+						<StyledCardActions>
 							<Button type='submit'>Submit</Button>
-						</CardActions>
+						</StyledCardActions>
 					</form>
 				</CardContent>
 			</Card>
-		</Box>
+		</StyledBox>
 	);
 };
 

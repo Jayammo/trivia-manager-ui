@@ -1,5 +1,11 @@
+import styled from '@emotion/styled';
 import { TextField } from '@mui/material';
 import { Controller, useFormState } from 'react-hook-form';
+
+export const StyledTextField = styled(TextField)`
+	margin-top: ${({ theme }) => theme.spacing(2)};
+	width: 100%;
+`;
 
 const FormTextField = ({ control, name, ...otherTextFieldProps }) => {
 	const { errors } = useFormState({ control });
@@ -10,11 +16,9 @@ const FormTextField = ({ control, name, ...otherTextFieldProps }) => {
 			name={name}
 			control={control}
 			render={({ field }) => (
-				<TextField
-					fullWidth
+				<StyledTextField
 					error={hasError}
 					helperText={message}
-					sx={{ marginTop: 2 }}
 					{...field}
 					{...otherTextFieldProps}
 				/>
