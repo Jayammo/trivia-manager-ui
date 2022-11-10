@@ -5,6 +5,7 @@ import Header from '../Header/Header';
 import { Container, CssBaseline, Paper, Divider, Box } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import styled from '@emotion/styled';
+import { useAuth } from '../../contexts/AuthProvider';
 
 const StyledPaper = styled(Paper)`
 	display: flex;
@@ -21,6 +22,7 @@ const StyledBox = styled(Box)`
 `;
 
 const Layout = () => {
+	const { loading } = useAuth();
 	return (
 		<>
 			<Header />
@@ -29,9 +31,7 @@ const Layout = () => {
 					<CssBaseline />
 					<Nav />
 					<Divider />
-					<StyledBox>
-						<Outlet />
-					</StyledBox>
+					<StyledBox>{loading ? 'loading...' : <Outlet />}</StyledBox>
 				</StyledPaper>
 			</Container>
 		</>

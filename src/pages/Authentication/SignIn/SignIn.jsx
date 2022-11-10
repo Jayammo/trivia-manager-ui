@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SignInYupSchema } from '../AuthYupSchema';
 import { useNavigate } from 'react-router-dom';
-import { SetCookie } from '../../../helper/CookieHandler';
+import { SetToken } from '../../../helper/CookieHandler';
 import { useAuth } from '../../../contexts/AuthProvider';
 import { StyledBox, StyledCardActions } from '../StyledAuth';
 
@@ -29,10 +29,9 @@ const SignIn = () => {
 		try {
 			const tokenString = await login(loginModel);
 			const response = JSON.parse(tokenString);
-
 			if (response?.token) {
 				setCurrentUser({ username: loginModel.username });
-				SetCookie(response.token);
+				SetToken(response.token);
 				navigate('/trivia');
 			}
 		} catch (err) {
