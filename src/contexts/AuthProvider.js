@@ -12,12 +12,12 @@ export const AuthProvider = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState();
 	const [loading, setLoading] = useState(true);
 
-	const signup = (username, email, password) => {
-		return registerUser(username, email, password);
+	const signup = (registerModel) => {
+		return registerUser(registerModel);
 	};
 
-	const login = (email, password) => {
-		return loginUser(email, password);
+	const login = ({ username, password }) => {
+		return loginUser(username, password);
 	};
 
 	useEffect(() => {

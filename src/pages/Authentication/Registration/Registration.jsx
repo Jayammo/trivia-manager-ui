@@ -36,7 +36,6 @@ const Registration = () => {
 		<StyledBox>
 			<Card raised={true}>
 				<CardHeader
-					sx={{ paddingBottom: 0 }}
 					title={
 						<Typography variant='h4' align='center'>
 							Register
