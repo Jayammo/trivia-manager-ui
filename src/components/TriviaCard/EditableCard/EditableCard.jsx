@@ -34,7 +34,7 @@ const EditableCard = () => {
 		reValidateMode: 'onBlur',
 		defaultValues: {
 			title: '',
-			date: new Date(),
+			startDate: new Date(),
 			duration: 0,
 			locationName: '',
 			location: '',
@@ -54,7 +54,11 @@ const EditableCard = () => {
 				<CardContent>
 					<form onSubmit={handleSubmit(console.log)}>
 						<FormTextField control={control} name='title' label='Title' />
-						<FormDatePicker control={control} name='date' label='Date' />
+						<FormDatePicker
+							control={control}
+							name='startDate'
+							label='Start Date'
+						/>
 						<FormTextField
 							control={control}
 							name='duration'
