@@ -1,14 +1,7 @@
-import styled from '@emotion/styled';
-import { TextField } from '@mui/material';
 import { Controller, useFormState } from 'react-hook-form';
+import { StyledTextField } from './FormTextField';
 
-export const StyledTextField = styled(TextField)`
-	margin-top: ${({ theme }) => theme.spacing(2)};
-	width: 100%;
-	text-transform: uppercase;
-`;
-
-const FormTextField = ({ control, name, ...otherTextFieldProps }) => {
+const FormDatePicker = ({ control, name, ...otherTextFieldProps }) => {
 	const { errors } = useFormState({ control });
 	const hasError = Boolean(errors[name]);
 	const message = errors[name]?.message;
@@ -18,7 +11,7 @@ const FormTextField = ({ control, name, ...otherTextFieldProps }) => {
 			control={control}
 			render={({ field }) => (
 				<StyledTextField
-					variant='filled'
+					label='Date&Time picker'
 					error={hasError}
 					helperText={message}
 					{...field}
@@ -29,4 +22,4 @@ const FormTextField = ({ control, name, ...otherTextFieldProps }) => {
 	);
 };
 
-export default FormTextField;
+export default FormDatePicker;
