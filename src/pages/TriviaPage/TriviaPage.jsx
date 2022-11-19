@@ -18,7 +18,11 @@ const TriviPage = () => {
 		isLoading,
 		error,
 		data: triviaEvents,
-	} = useQuery({ queryKey: ['triviaEvents'], queryFn: fetchAllTriviaEvent });
+	} = useQuery({
+		queryKey: ['triviaEvents'],
+		queryFn: fetchAllTriviaEvent,
+		staleTime: 1000 * 60,
+	});
 
 	const createNew = () => {
 		navigate('/trivia/create');

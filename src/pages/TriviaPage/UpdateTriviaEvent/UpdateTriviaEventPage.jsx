@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
 import { Box } from '@mui/system';
-import { useEffect, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EditableCard } from '../../../components/TriviaCard/index';
 import {
-	fetchTrivia,
+	fetchAllTriviaEvent,
 	updateTriviaEvent,
 } from '../../../services/TriviaManager/TriviaEventService';
 import { yupSchema } from '../YupSchema';
@@ -17,24 +19,41 @@ export const StyledBox = styled(Box)`
 const UpdateTriviaEventPage = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
+	const queryClient = useQueryClient();
 	const [triviaEvent, setTriviaEvent] = useState();
-	const [loading, setLoading] = useState(true);
+
+	const {
+		isLoading,
+		error,
+		data: triviaEvents,
+	} = useQuery({
+		queryKey: ['triviaEvents'],
+		queryFn: fetchAllTriviaEvent,
+		staleTime: 1000 * 60,
+	});
+
+	const { mutateAsync } = useMutation({
+		mutationKey: ['triviaEvents'],
+		mutationFn: updateTriviaEvent,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: 'triviaEvents' });
+		},
+	});
 
 	useEffect(() => {
-		const fetch = async () => {
-			const response = await fetchTrivia(id);
-			setTriviaEvent(response);
-			setLoading(false);
-		};
-		fetch();
-	}, [id]);
+		if (!isLoading) {
+			setTriviaEvent(triviaEvents.find((trivia) => trivia.id === id));
+		}
+	}, [id, triviaEvents]);
 
 	const submitCallback = async (updateTrivia) => {
-		await updateTriviaEvent(updateTrivia);
+		await mutateAsync(updateTrivia);
 		navigate('/trivia');
 	};
 
-	if (loading) return '...loading';
+	if (isLoading || !triviaEvent) return '...loading';
+
+	if (error) return `An error has occurred: ${error.message}`;
 
 	return (
 		<StyledBox>
