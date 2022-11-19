@@ -11,6 +11,7 @@ import {
 import { useForm } from 'react-hook-form';
 import FormTextField from '../../UI/Form/FormTextField';
 import FormDatePicker from '../../UI/Form/FormDatePicker';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 export const StyledCardActions = styled(CardActions)`
 	display: flex;
@@ -28,17 +29,22 @@ const StyledBox = styled(Box)(({ theme }) => ({
 	},
 }));
 
-const EditableCard = () => {
+const EditableCard = ({
+	submitCallback,
+	yupSchema,
+	triviaEvent = {
+		title: '',
+		startDate: new Date(),
+		duration: 0,
+		locationName: '',
+		location: '',
+	},
+}) => {
 	const { control, handleSubmit } = useForm({
 		mode: 'onSubmit',
 		reValidateMode: 'onBlur',
-		defaultValues: {
-			title: '',
-			startDate: new Date(),
-			duration: 0,
-			locationName: '',
-			location: '',
-		},
+		resolver: yupResolver(yupSchema),
+		defaultValues: triviaEvent,
 	});
 
 	return (
@@ -52,7 +58,7 @@ const EditableCard = () => {
 					}
 				/>
 				<CardContent>
-					<form onSubmit={handleSubmit(console.log)}>
+					<form onSubmit={handleSubmit(submitCallback)}>
 						<FormTextField control={control} name='title' label='Title' />
 						<FormDatePicker
 							control={control}
@@ -62,7 +68,7 @@ const EditableCard = () => {
 						<FormTextField
 							control={control}
 							name='duration'
-							label='Duration'
+							label='Duration (hrs)'
 							type='number'
 						/>
 						<FormTextField
