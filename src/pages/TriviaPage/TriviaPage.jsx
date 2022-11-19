@@ -1,9 +1,10 @@
 import { Box, Button } from '@mui/material';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DisplayCard } from '../../components/TriviaCard/index';
 import { fetchAllTriviaEvent } from '../../services/TriviaManager/TriviaEventService';
 import styled from '@emotion/styled';
+import { useQuery } from '@tanstack/react-query';
 
 export const StyledBox = styled(Box)`
 	display: flex;
@@ -11,20 +12,21 @@ export const StyledBox = styled(Box)`
 `;
 
 const TriviPage = () => {
-	const [triviaEvents, setTriviaEvents] = useState([]);
 	const navigate = useNavigate();
+
+	const {
+		isLoading,
+		error,
+		data: triviaEvents,
+	} = useQuery({ queryKey: ['triviaEvents'], queryFn: fetchAllTriviaEvent });
 
 	const createNew = () => {
 		navigate('/trivia/create');
 	};
 
-	useEffect(() => {
-		const fetch = async () => {
-			const triviaList = await fetchAllTriviaEvent();
-			setTriviaEvents(triviaList);
-		};
-		fetch();
-	}, []);
+	if (isLoading) return '...Loading';
+
+	if (error) return `An error has occurred: ${error.message}`;
 
 	return (
 		<>
