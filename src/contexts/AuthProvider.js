@@ -16,8 +16,8 @@ export const AuthProvider = ({ children }) => {
 		return registerUser(registerModel);
 	};
 
-	const login = ({ username, password }) => {
-		return loginUser(username, password);
+	const login = (loginModel) => {
+		return loginUser(loginModel);
 	};
 
 	useEffect(() => {

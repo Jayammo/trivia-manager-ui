@@ -6,47 +6,77 @@ import {
 	CardActions,
 	CardContent,
 	CardHeader,
+	Typography,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import FormTextField from '../../UI/Form/FormTextField';
+import FormDatePicker from '../../UI/Form/FormDatePicker';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 export const StyledCardActions = styled(CardActions)`
 	display: flex;
 	justify-content: flex-end;
 `;
 
-const StyledBox = styled(Box)`
-	width: 100%;
-	margin: ${({ theme }) => theme.spacing(2)};
-`;
+const StyledBox = styled(Box)(({ theme }) => ({
+	width: '100%',
+	margin: theme.spacing(2),
+	'.MuiCardHeader-root': {
+		paddingBottom: 0,
+	},
+	'.MuiCardContent-root': {
+		padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
+	},
+}));
 
-const EditableCard = () => {
+const EditableCard = ({
+	submitCallback,
+	yupSchema,
+	triviaEvent = {
+		title: '',
+		startDate: new Date(),
+		duration: 0,
+		locationName: '',
+		location: '',
+	},
+}) => {
 	const { control, handleSubmit } = useForm({
 		mode: 'onSubmit',
 		reValidateMode: 'onBlur',
+		resolver: yupResolver(yupSchema),
+		defaultValues: triviaEvent,
 	});
 
 	return (
 		<StyledBox>
 			<Card raised={true}>
 				<CardHeader
-					action={
-						<Box>
-							<FormTextField control={control} name='Title' label='Title' />
-							<FormTextField control={control} name='Date' label='Date' />
-						</Box>
+					title={
+						<Typography variant='h5' align='center'>
+							Trivia Event
+						</Typography>
 					}
 				/>
 				<CardContent>
-					<form onSubmit={handleSubmit(console.log)}>
-						<CardContent>
-							<FormTextField
-								control={control}
-								name='locationName'
-								label='Location Name'
-							/>
-							<FormTextField control={control} name='address' label='Address' />
-						</CardContent>
+					<form onSubmit={handleSubmit(submitCallback)}>
+						<FormTextField control={control} name='title' label='Title' />
+						<FormDatePicker
+							control={control}
+							name='startDate'
+							label='Start Date'
+						/>
+						<FormTextField
+							control={control}
+							name='duration'
+							label='Duration (hrs)'
+							type='number'
+						/>
+						<FormTextField
+							control={control}
+							name='locationName'
+							label='Location Name'
+						/>
+						<FormTextField control={control} name='location' label='Location' />
 						<StyledCardActions>
 							<Button type='submit'>Submit</Button>
 						</StyledCardActions>

@@ -7,6 +7,7 @@ import CreateTriviaEventPage from './pages/TriviaPage/CreateTriviaEvent/CreateTr
 import Registration from './pages/Authentication/Registration/Registration.jsx';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute.jsx';
 import { AuthProvider } from './contexts/AuthProvider.js';
+import UpdateTriviaEventPage from './pages/TriviaPage/UpdateTriviaEvent/UpdateTriviaEventPage.jsx';
 
 function App() {
 	return (
@@ -23,6 +24,10 @@ function App() {
 						<Route element={<PrivateRoute />}>
 							<Route path='trivia' element={<TriviaPage />} />
 							<Route path='trivia/create' element={<CreateTriviaEventPage />} />
+							<Route
+								path='trivia/update/:id'
+								element={<UpdateTriviaEventPage />}
+							/>
 							<Route path='teams' element={<div>Teams</div>} />
 							<Route path='questions' element={<div>Question</div>} />
 						</Route>

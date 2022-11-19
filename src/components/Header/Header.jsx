@@ -24,7 +24,7 @@ const Header = () => {
 					>
 						<ArrowBackIcon />
 					</IconButton>
-					<StyledTypography variant='h6' component='div' align='center'>
+					<StyledTypography variant='h6' align='center'>
 						Trivia Manager
 					</StyledTypography>
 					<HeaderOptions />

@@ -1,30 +1,31 @@
 import { Box, Button } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DisplayCard } from '../../components/TriviaCard/index';
 import { fetchAllTriviaEvent } from '../../services/TriviaManager/TriviaEventService';
+import styled from '@emotion/styled';
+
+export const StyledBox = styled(Box)`
+	display: flex;
+	justify-content: center;
+`;
 
 const TriviPage = () => {
+	const [triviaEvents, setTriviaEvents] = useState([]);
 	const navigate = useNavigate();
 
 	const createNew = () => {
 		navigate('/trivia/create');
 	};
-	const triviaEvents = [
-		{
-			title: 'Trivia Event',
-			startTime: 'Start Time',
-			locationName: 'Location',
-			adress: 'Adress',
-		},
-	];
+
 	useEffect(() => {
 		const fetch = async () => {
 			const triviaList = await fetchAllTriviaEvent();
-			console.log({ triviaList });
+			setTriviaEvents(triviaList);
 		};
 		fetch();
 	}, []);
+
 	return (
 		<>
 			<Box>
@@ -33,9 +34,9 @@ const TriviPage = () => {
 				</Button>
 			</Box>
 			{triviaEvents.map((trivia, index) => (
-				<Box key={index} style={{ display: 'flex', justifyContent: 'center' }}>
+				<StyledBox key={index}>
 					<DisplayCard trivia={trivia} />
-				</Box>
+				</StyledBox>
 			))}
 		</>
 	);

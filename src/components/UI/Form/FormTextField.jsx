@@ -5,6 +5,7 @@ import { Controller, useFormState } from 'react-hook-form';
 export const StyledTextField = styled(TextField)`
 	margin-top: ${({ theme }) => theme.spacing(2)};
 	width: 100%;
+	text-transform: uppercase;
 `;
 
 const FormTextField = ({ control, name, ...otherTextFieldProps }) => {
@@ -17,6 +18,7 @@ const FormTextField = ({ control, name, ...otherTextFieldProps }) => {
 			control={control}
 			render={({ field }) => (
 				<StyledTextField
+					variant='filled'
 					error={hasError}
 					helperText={message}
 					{...field}
