@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Box } from '@mui/system';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { EditableCard } from '../../../components/TriviaCard/index';
 import { createTriviaEvent } from '../../../services/TriviaManager/TriviaEventService';
@@ -12,11 +13,14 @@ export const StyledBox = styled(Box)`
 
 const CreateTriviaEventPage = () => {
 	const navigate = useNavigate();
+	const { mutateAsync, error } = useMutation({ mutationFn: createTriviaEvent });
 
-	const submitCallback = async (e) => {
-		await createTriviaEvent(e);
+	const submitCallback = async (newTriviaEvent) => {
+		await mutateAsync(newTriviaEvent);
 		navigate('/trivia');
 	};
+
+	if (error) return `An error has occurred: ${error.message}`;
 
 	return (
 		<StyledBox>
