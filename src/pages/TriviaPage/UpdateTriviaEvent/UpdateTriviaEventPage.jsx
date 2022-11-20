@@ -1,14 +1,12 @@
 import styled from '@emotion/styled';
 import { Box } from '@mui/system';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EditableCard } from '../../../components/TriviaCard/index';
-import {
-	fetchAllTriviaEvent,
-	updateTriviaEvent,
-} from '../../../services/TriviaManager/TriviaEventService';
+import useTriviaEventsMutation from '../../../hooks/TriviaEventsQuery/useTriviaEventsMutation';
+import useTriviaEventsQuery from '../../../hooks/TriviaEventsQuery/useTriviaEventsQuery';
+import { updateTriviaEvent } from '../../../services/TriviaManager/TriviaEventService';
 import { yupSchema } from '../YupSchema';
 
 export const StyledBox = styled(Box)`
@@ -19,29 +17,16 @@ export const StyledBox = styled(Box)`
 const UpdateTriviaEventPage = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
-	const queryClient = useQueryClient();
 	const [triviaEvent, setTriviaEvent] = useState();
 
-	const {
-		isLoading,
-		error,
-		data: triviaEvents,
-	} = useQuery({
-		queryKey: ['triviaEvents'],
-		queryFn: fetchAllTriviaEvent,
-		staleTime: 1000 * 60,
-	});
+	const { isLoading, error, isFetched, triviaEvents } = useTriviaEventsQuery();
 
-	const { mutateAsync } = useMutation({
-		mutationKey: ['triviaEvents'],
+	const { mutateAsync } = useTriviaEventsMutation({
 		mutationFn: updateTriviaEvent,
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: 'triviaEvents' });
-		},
 	});
 
 	useEffect(() => {
-		if (!isLoading) {
+		if (isFetched) {
 			setTriviaEvent(triviaEvents.find((trivia) => trivia.id === id));
 		}
 	}, [id, triviaEvents]);
