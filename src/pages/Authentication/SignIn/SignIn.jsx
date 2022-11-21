@@ -27,8 +27,7 @@ const SignIn = () => {
 	const onSubmit = async (data) => {
 		const loginModel = { username: data.username, password: data.password };
 		try {
-			const tokenString = await login(loginModel);
-			const response = JSON.parse(tokenString);
+			const response = await login(loginModel);
 			if (response?.token) {
 				setCurrentUser({ username: loginModel.username });
 				SetToken(response.token);
