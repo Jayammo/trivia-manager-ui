@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { removeTriviaEvent } from '../../../services/TriviaManager/TriviaEventService';
 
 const StyledBox = styled(Box)`
-	width: 450;
+	width: 500px;
 	margin: ${({ theme }) => theme.spacing(2)};
 `;
 

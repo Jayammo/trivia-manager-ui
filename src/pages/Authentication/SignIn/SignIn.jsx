@@ -4,6 +4,7 @@ import {
 	Typography,
 	CardHeader,
 	Button,
+	CircularProgress,
 } from '@mui/material';
 import FormTextField from '../../../components/UI/Form/FormTextField';
 import { useForm } from 'react-hook-form';
@@ -13,19 +14,23 @@ import { useNavigate } from 'react-router-dom';
 import { SetToken } from '../../../helper/CookieHandler';
 import { useAuth } from '../../../contexts/AuthProvider';
 import { StyledBox, StyledCardActions } from '../StyledAuth';
+import { useState } from 'react';
 
 const SignIn = () => {
+	const [loading, setLoading] = useState(false);
 	const { control, handleSubmit } = useForm({
 		mode: 'onSubmit',
 		reValidateMode: 'onBlur',
 		defaultValues: { username: '', password: '' },
 		resolver: yupResolver(SignInYupSchema),
 	});
+
 	const navigate = useNavigate();
 	const { login, setCurrentUser } = useAuth();
 
 	const onSubmit = async (data) => {
 		const loginModel = { username: data.username, password: data.password };
+		setLoading(true);
 		try {
 			const response = await login(loginModel);
 			if (response?.token) {
@@ -35,6 +40,8 @@ const SignIn = () => {
 			}
 		} catch (err) {
 			console.error('Error Here =>', err);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -60,7 +67,11 @@ const SignIn = () => {
 						/>
 					</CardContent>
 					<StyledCardActions>
-						<Button type='submit'>Submit</Button>
+						{loading ? (
+							<CircularProgress />
+						) : (
+							<Button type='submit'>Submit</Button>
+						)}
 					</StyledCardActions>
 				</form>
 			</Card>
