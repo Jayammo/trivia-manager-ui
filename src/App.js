@@ -8,6 +8,7 @@ import Registration from './pages/Authentication/Registration/Registration.jsx';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute.jsx';
 import { AuthProvider } from './contexts/AuthProvider.js';
 import UpdateTriviaEventPage from './pages/TriviaPage/UpdateTriviaEvent/UpdateTriviaEventPage.jsx';
+import QuestionsPage from './pages/QuestionPage/QuestionsPage.jsx';
 
 function App() {
 	return (
@@ -29,7 +30,7 @@ function App() {
 								element={<UpdateTriviaEventPage />}
 							/>
 							<Route path='teams' element={<div>Teams</div>} />
-							<Route path='questions' element={<div>Question</div>} />
+							<Route path='questions' element={<QuestionsPage />} />
 						</Route>
 
 						{/* catch all */}

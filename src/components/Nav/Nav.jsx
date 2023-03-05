@@ -3,7 +3,7 @@ import { Box, Tabs } from '@mui/material';
 import { LinkTab } from '../UI/LinkTab/LinkTab';
 
 const Nav = () => {
-	const [index, setIndex] = useState(0);
+	const [index, setIndex] = useState(4);
 
 	const handleChange = (event, newValue) => {
 		setIndex(newValue);
