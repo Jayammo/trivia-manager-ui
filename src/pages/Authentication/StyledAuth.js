@@ -1,13 +1,16 @@
 import styled from '@emotion/styled';
-import { Box, CardActions } from '@mui/material';
+import { Card, CardActions } from '@mui/material';
 
 export const StyledCardActions = styled(CardActions)`
 	display: flex;
 	justify-content: flex-end;
+	padding: 16px;
+	& > .register {
+		flex: auto;
+	}
 `;
 
-export const StyledBox = styled(Box)`
-	display: flex;
-	justify-content: center;
+export const StyledCard = styled(Card)`
 	margin: auto;
+	width: 500px;
 `;
