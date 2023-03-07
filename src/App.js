@@ -11,6 +11,7 @@ import UpdateTriviaEventPage from './pages/TriviaPage/UpdateTriviaEvent/UpdateTr
 import QuestionsPage from './pages/QuestionPage/QuestionsPage.jsx';
 
 function App() {
+	console.log("Hello");
 	return (
 		<AuthProvider>
 			<ThemeColorModeContextProvider>
