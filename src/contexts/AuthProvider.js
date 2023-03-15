@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { DecodeToken, Logout } from '../helper/CookieHandler';
+import { DecodeToken, Logout, SetToken } from '../helper/CookieHandler';
 import { loginUser, registerUser } from '../services/TriviaManager/AuthService';
 
 const AuthContext = createContext();
@@ -12,12 +12,21 @@ export const AuthProvider = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState();
 	const [loading, setLoading] = useState(true);
 
-	const signup = (registerModel) => {
-		return registerUser(registerModel);
+	const signup = async (registerModel) => {
+		const response = await registerUser(registerModel);
+		return await login(response.login);
 	};
 
-	const login = (loginModel) => {
-		return loginUser(loginModel);
+	const login = async (loginModel) => {
+		const response = await loginUser(loginModel);
+		const { token } = response;
+
+		if (!token) {
+			return;
+		}
+		setCurrentUser({ username: loginModel.username });
+		SetToken(token);
+		return token;
 	};
 
 	useEffect(() => {

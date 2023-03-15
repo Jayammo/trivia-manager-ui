@@ -5,8 +5,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { RegistrationYupSchema } from '../AuthYupSchema';
 import { useAuth } from '../../../contexts/AuthProvider';
 import { StyledCard, StyledCardActions } from '../StyledAuth';
+import ToggleSwitch from '../../../components/UI/Switch/ToggleSwitch';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useToaster } from '../../../contexts/ToasterContext';
 
 const Registration = () => {
+	const [showPassword, setShowPassword] = useState(false);
+
 	const { control, handleSubmit } = useForm({
 		mode: 'onSubmit',
 		reValidateMode: 'onBlur',
@@ -15,15 +21,23 @@ const Registration = () => {
 	});
 
 	const { signup } = useAuth();
+	const navigate = useNavigate();
+	const { popToast } = useToaster();
 
-	const onSubmit = (data) => {
+	const onSubmit = async (data) => {
 		const registerModel = {
 			username: data.username,
 			email: data.email,
 			password: data.password,
 		};
-
-		signup(registerModel);
+		try {
+			const response = await signup(registerModel);
+			if (response) {
+				navigate('/trivia');
+			}
+		} catch (error) {
+			popToast('error', 'Invalid Username/Password');
+		}
 	};
 
 	return (
@@ -43,7 +57,18 @@ const Registration = () => {
 						control={control}
 						name='password'
 						label='Password'
-						type='password'
+						type={!showPassword && 'password'}
+					/>
+					<FormTextField
+						control={control}
+						name='confirmPassword'
+						label='Confirm Password'
+						type={!showPassword && 'password'}
+					/>
+					<ToggleSwitch
+						checked={showPassword}
+						setChecked={setShowPassword}
+						label='Show Password'
 					/>
 				</CardContent>
 				<StyledCardActions>

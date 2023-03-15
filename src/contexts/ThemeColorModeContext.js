@@ -5,6 +5,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ToasterProvider } from './ToasterContext';
+import Toaster from '../components/UI/Toaster/Toaster';
 
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
@@ -14,12 +16,15 @@ export const ThemeColorModeContextProvider = ({ children }) => {
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<LocalizationProvider dateAdapter={AdapterLuxon}>
-				<ColorModeContext.Provider value={colorMode}>
-					<ThemeProvider theme={theme}>{children}</ThemeProvider>
-				</ColorModeContext.Provider>
-			</LocalizationProvider>
-			<ReactQueryDevtools initialIsOpen={false} />
+			<ToasterProvider>
+				<LocalizationProvider dateAdapter={AdapterLuxon}>
+					<ColorModeContext.Provider value={colorMode}>
+						<ThemeProvider theme={theme}>{children}</ThemeProvider>
+					</ColorModeContext.Provider>
+				</LocalizationProvider>
+				<ReactQueryDevtools initialIsOpen={false} />
+				<Toaster />
+			</ToasterProvider>
 		</QueryClientProvider>
 	);
 };
