@@ -10,10 +10,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SignInYupSchema } from '../AuthYupSchema';
 import { Link, useNavigate } from 'react-router-dom';
-import { SetToken } from '../../../helper/CookieHandler';
 import { useAuth } from '../../../contexts/AuthProvider';
 import { StyledCardActions, StyledCard } from '../StyledAuth';
 import { useState } from 'react';
+import { useToaster } from '../../../contexts/ToasterContext';
 
 const SignIn = () => {
 	const [loading, setLoading] = useState(false);
@@ -25,23 +25,23 @@ const SignIn = () => {
 	});
 
 	const navigate = useNavigate();
-	const { login, setCurrentUser } = useAuth();
+	const { login } = useAuth();
+	const { popToast } = useToaster();
 
 	const onSubmit = async (data) => {
-		const loginModel = { username: data.username, password: data.password };
 		setLoading(true);
+
 		try {
+			const loginModel = { username: data.username, password: data.password };
 			const response = await login(loginModel);
-			if (response?.token) {
-				setCurrentUser({ username: loginModel.username });
-				SetToken(response.token);
+			if (response) {
 				navigate('/trivia');
 			}
-		} catch (err) {
-			console.error('Error Here =>', err);
-		} finally {
-			setLoading(false);
+		} catch (error) {
+			popToast('error', 'Invalid Username/Password');
 		}
+
+		setLoading(false);
 	};
 
 	return (

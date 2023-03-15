@@ -12,5 +12,8 @@ export const RegistrationYupSchema = yup
 			.string()
 			.required('Email is required!')
 			.email('Need a valid email'),
+		confirmPassword: yup
+			.string()
+			.oneOf([yup.ref('password')], 'Password must match'),
 	})
 	.concat(SignInYupSchema);
