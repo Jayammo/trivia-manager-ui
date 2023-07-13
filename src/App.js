@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import TriviaPage from './pages/TriviaPage/TriviaPage.jsx';
 import Layout from './components/Layout/Layout.jsx';
 import SignIn from './pages/Authentication/SignIn/SignIn.jsx';
-import { ThemeColorModeContextProvider } from './contexts/ThemeColorModeContext.js';
+import { ContextWapper } from './contexts/ContextWapper.js';
 import CreateTriviaEventPage from './pages/TriviaPage/CreateTriviaEvent/CreateTriviaEventPage.jsx';
 import Registration from './pages/Authentication/Registration/Registration.jsx';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute.jsx';
@@ -13,7 +13,7 @@ import QuestionsPage from './pages/QuestionPage/QuestionsPage.jsx';
 function App() {
 	return (
 		<AuthProvider>
-			<ThemeColorModeContextProvider>
+			<ContextWapper>
 				<Routes>
 					<Route path='/' element={<Layout />}>
 						{/* public routes */}
@@ -37,7 +37,7 @@ function App() {
 						<Route path='*' element={<div>Missing</div>} />
 					</Route>
 				</Routes>
-			</ThemeColorModeContextProvider>
+			</ContextWapper>
 		</AuthProvider>
 	);
 }

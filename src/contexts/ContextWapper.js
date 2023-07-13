@@ -10,7 +10,7 @@ import Toaster from '../components/UI/Toaster/Toaster';
 
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
-export const ThemeColorModeContextProvider = ({ children }) => {
+export const ContextWapper = ({ children }) => {
 	const { theme, colorMode } = useColorMode();
 	const queryClient = new QueryClient();
 

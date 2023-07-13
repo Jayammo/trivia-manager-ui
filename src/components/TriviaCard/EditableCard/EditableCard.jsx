@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form';
 import FormTextField from '../../UI/Form/FormTextField';
 import FormDatePicker from '../../UI/Form/FormDatePicker';
 import { yupResolver } from '@hookform/resolvers/yup';
+import LinkPreview from '../../UI/LinkPreview/LinkPreview';
 
 export const StyledCardActions = styled(CardActions)`
 	display: flex;
@@ -27,6 +28,9 @@ const StyledBox = styled(Box)(({ theme }) => ({
 	'.MuiCardContent-root': {
 		padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
 	},
+	'.marginTop': {
+		marginTop: `${theme.spacing(3)}`,
+	},
 }));
 
 const EditableCard = ({
@@ -38,13 +42,14 @@ const EditableCard = ({
 		duration: 0,
 		locationName: '',
 		location: '',
+		locationLink: '',
 	},
 }) => {
 	const { control, handleSubmit } = useForm({
-		mode: 'onSubmit',
+		mode: 'onBlur',
 		reValidateMode: 'onBlur',
 		resolver: yupResolver(yupSchema),
-		defaultValues: triviaEvent,
+		defaultValues: { ...triviaEvent },
 	});
 
 	return (
@@ -77,6 +82,12 @@ const EditableCard = ({
 							label='Location Name'
 						/>
 						<FormTextField control={control} name='location' label='Location' />
+						<Box className='marginTop'> - OR - </Box>
+						<LinkPreview
+							control={control}
+							name='locationLink'
+							label='Location Link'
+						/>
 						<StyledCardActions>
 							<Button type='submit'>Submit</Button>
 						</StyledCardActions>
