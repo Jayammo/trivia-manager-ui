@@ -3,7 +3,7 @@ import { TextField } from '@mui/material';
 import { Controller, useFormState } from 'react-hook-form';
 
 export const StyledTextField = styled(TextField)`
-	margin-top: ${({ theme }) => theme.spacing(2)};
+	margin-top: ${({ theme }) => theme.spacing(3)};
 	width: 100%;
 	text-transform: uppercase;
 `;

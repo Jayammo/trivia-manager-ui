@@ -1,7 +1,7 @@
 import { ListItemIcon, ListItemText, useTheme } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { ColorModeContext } from '../../../../contexts/ThemeColorModeContext';
+import { ColorModeContext } from '../../../../contexts/ContextWapper';
 import { useContext } from 'react';
 import { MenuItemWrap } from '../../../UI/MenuWrap';
 
