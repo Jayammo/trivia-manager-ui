@@ -11,7 +11,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { MenuItemWrap, MenuWrap } from '../../UI/MenuWrap';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
-import { removeTriviaEvent } from '../../../services/TriviaManager/TriviaEventService';
+import { removeTriviaEvent } from '../../../services/TriviaEventService';
 import { DateTime } from 'luxon';
 
 const StyledBox = styled(Box)`

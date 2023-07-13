@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchAllTriviaEvent } from '../../services/TriviaManager/TriviaEventService';
+import { fetchAllTriviaEvent } from '../../services/TriviaEventService';
 
 const useTriviaEventsQuery = () => {
 	const {

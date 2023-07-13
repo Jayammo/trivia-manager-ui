@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { DecodeToken, Logout, SetToken } from '../helper/CookieHandler';
-import { loginUser, registerUser } from '../services/TriviaManager/AuthService';
+import { loginUser, registerUser } from '../services/AuthService';
 
 const AuthContext = createContext();
 

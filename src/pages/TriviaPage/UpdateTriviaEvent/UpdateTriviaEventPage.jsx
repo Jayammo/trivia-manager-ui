@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { EditableCard } from '../../../components/TriviaCard/index';
 import useTriviaEventsMutation from '../../../hooks/TriviaEventsQuery/useTriviaEventsMutation';
 import useTriviaEventsQuery from '../../../hooks/TriviaEventsQuery/useTriviaEventsQuery';
-import { updateTriviaEvent } from '../../../services/TriviaManager/TriviaEventService';
+import { updateTriviaEvent } from '../../../services/TriviaEventService';
 import { yupSchema } from '../YupSchema';
 
 export const StyledBox = styled(Box)`

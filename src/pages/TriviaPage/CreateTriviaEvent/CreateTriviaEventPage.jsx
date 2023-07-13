@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import { EditableCard } from '../../../components/TriviaCard/index';
 import useTriviaEventsMutation from '../../../hooks/TriviaEventsQuery/useTriviaEventsMutation';
-import { createTriviaEvent } from '../../../services/TriviaManager/TriviaEventService';
+import { createTriviaEvent } from '../../../services/TriviaEventService';
 import { yupSchema } from '../YupSchema';
 
 export const StyledBox = styled(Box)`

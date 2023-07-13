@@ -1,4 +1,4 @@
-import { triviaApi } from '../api';
+import { triviaApi } from './api';
 
 const TRIVIA_EVENT = '/trivia/event';
 

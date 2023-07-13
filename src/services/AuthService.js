@@ -1,4 +1,4 @@
-import { triviaApi } from '../api';
+import { triviaApi } from './api';
 
 const AUTH_URL = '/auth';
 
