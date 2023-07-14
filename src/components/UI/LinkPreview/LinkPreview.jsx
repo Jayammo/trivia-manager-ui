@@ -1,9 +1,16 @@
 import { Box, Card, CardMedia, Link, Typography } from '@mui/material';
 import FormTextField from '../Form/FormTextField';
-import { useState } from 'react';
-import { fetchLinkPreview } from '../../../services/LinkPreviewService';
+import useLinkPreviewQuery from '../../../hooks/LinkPreviewQuery/useLinkPreviewQuery';
+import useLinkPreviewMutation from '../../../hooks/LinkPreviewQuery/useLinkPreviewMutation';
+
 const LinkPreview = ({ control, name, label }) => {
-	const [linkPreview, setLinkPreview] = useState();
+	const { isLoading, error, linkPreview } = useLinkPreviewQuery();
+	const { mutateAsync } = useLinkPreviewMutation();
+
+	if (isLoading) return '...loading';
+
+	if (error) return `An error has occurred: ${error.message}`;
+
 	return (
 		<>
 			<FormTextField
@@ -11,8 +18,7 @@ const LinkPreview = ({ control, name, label }) => {
 				name={name}
 				label={label}
 				onBlur={async (e) => {
-					const response = await fetchLinkPreview(e.target.value);
-					setLinkPreview(response);
+					await mutateAsync();
 				}}
 			/>
 			{linkPreview && (
