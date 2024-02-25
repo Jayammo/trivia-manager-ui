@@ -1,11 +1,10 @@
 import { Box, Card, CardMedia, Link, Typography } from '@mui/material';
 import FormTextField from '../Form/FormTextField';
 import useLinkPreviewQuery from '../../../hooks/LinkPreviewQuery/useLinkPreviewQuery';
-import useLinkPreviewMutation from '../../../hooks/LinkPreviewQuery/useLinkPreviewMutation';
 
 const LinkPreview = ({ control, name, label }) => {
 	const { isLoading, error, linkPreview } = useLinkPreviewQuery();
-	const { mutateAsync } = useLinkPreviewMutation();
+	// const { mutateAsync } = useLinkPreviewMutation();
 
 	if (isLoading) return '...loading';
 
@@ -17,9 +16,7 @@ const LinkPreview = ({ control, name, label }) => {
 				control={control}
 				name={name}
 				label={label}
-				onBlur={async (e) => {
-					await mutateAsync();
-				}}
+				onBlur={async () => {}}
 			/>
 			{linkPreview && (
 				<Card sx={{ display: 'flex' }}>
